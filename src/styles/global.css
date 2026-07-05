@@ -1,0 +1,143 @@
+@import './themes.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root,
+[data-theme='light'],
+[data-theme='dark'] {
+  --radius: 2px;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+  --chrome-divider: linear-gradient(
+    90deg,
+    var(--divider-silver) 0%,
+    var(--divider-chrome) 35%,
+    transparent 100%
+  );
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-mono);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.section {
+  margin-top: 2.5rem;
+}
+
+.section:has(.section-title)::before,
+.section.resume-download::before {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-bottom: 2rem;
+  background: var(--chrome-divider);
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-pink);
+  margin: 0 0 1rem;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  color: var(--cursor);
+  animation: blink 1s step-end infinite;
+}
+
+.glow-surface {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 500ms ease;
+}
+
+.glow-surface__glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(
+    circle var(--spot-radius) at var(--x) var(--y),
+    #000 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle var(--spot-radius) at var(--x) var(--y),
+    #000 0%,
+    transparent 100%
+  );
+}
+
+.glow-surface__content {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: hover) {
+  .glow-surface:hover {
+    border-color: var(--accent-cyan);
+  }
+
+  .glow-surface:hover .glow-surface__glow {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-surface__glow {
+    display: none;
+  }
+
+  .cursor {
+    animation: none;
+    opacity: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
