@@ -23,7 +23,7 @@ import { pdfResumeAvailable } from './content/resume'
     <section class="section resume-download" aria-label="Resume download">
       <a
         v-if="pdfResumeAvailable"
-        href="/resume.pdf"
+        href="/adel_abdallah_resume.pdf"
         class="download-btn"
         download
       >

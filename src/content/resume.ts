@@ -166,4 +166,4 @@ export const skills = [
   'Git',
 ]
 
-export const pdfResumeAvailable = false
+export const pdfResumeAvailable = true
