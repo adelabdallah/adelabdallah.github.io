@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { siteMeta } from '../content/resume'
+import { useTypewriter } from '../composables/useTypewriter'
 
+const fullName = siteMeta.name
 const nameEl = ref<HTMLElement | null>(null)
 const spotX = ref(0)
 const spotY = ref(0)
+const { displayedText: displayedName, isReady, typeText } = useTypewriter(fullName)
 
 const SPOT_RADIUS = 100
 
@@ -15,6 +18,10 @@ function onMouseMove(event: MouseEvent) {
   spotY.value = event.clientY - rect.top
 }
 
+onMounted(() => {
+  typeText(fullName)
+})
+
 const highlightStyle = computed(() => ({
   '--x': `${spotX.value}px`,
   '--y': `${spotY.value}px`,
@@ -24,12 +31,12 @@ const highlightStyle = computed(() => ({
 
 <template>
   <header class="header">
-    <h1 class="title">
-      <span class="title-line">
+    <h1 class="title" :aria-label="fullName">
+      <span class="title-line" :class="{ 'is-ready': isReady }">
         <span ref="nameEl" class="name" @mousemove="onMouseMove">
-          <span class="name-base">{{ siteMeta.name }}</span>
+          <span class="name-base">{{ displayedName }}</span>
           <span class="name-highlight" aria-hidden="true" :style="highlightStyle">
-            {{ siteMeta.name }}
+            {{ displayedName }}
           </span>
         </span>
         <span class="cursor" aria-hidden="true">_</span>
@@ -59,6 +66,12 @@ const highlightStyle = computed(() => ({
   display: inline-flex;
   align-items: baseline;
   line-height: 1;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.title-line.is-ready {
+  opacity: 1;
 }
 
 .name {
@@ -100,6 +113,11 @@ const highlightStyle = computed(() => ({
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .title-line {
+    opacity: 1;
+    transition: none;
+  }
+
   .name-highlight {
     display: none;
     transition: none;

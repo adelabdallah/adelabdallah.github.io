@@ -58,18 +58,22 @@ const { onMouseMove, glowStyle } = useGlowSpotlight(headerEl, 100)
       </button>
     </div>
     <div
-      v-show="expanded"
       :id="`exp-panel-${entry.id}`"
-      class="experience-panel"
+      class="experience-panel-wrapper"
+      :class="{ 'experience-panel-wrapper--expanded': expanded }"
       role="region"
       :aria-labelledby="`exp-header-${entry.id}`"
+      :aria-hidden="!expanded"
+      :inert="!expanded"
     >
-      <ul class="experience-bullets">
-        <li v-for="(bullet, index) in entry.bullets" :key="index">{{ bullet }}</li>
-      </ul>
-      <ul v-if="entry.tech?.length" class="experience-tech">
-        <GlowPill v-for="tech in entry.tech" :key="tech" :label="tech" />
-      </ul>
+      <div class="experience-panel">
+        <ul class="experience-bullets">
+          <li v-for="(bullet, index) in entry.bullets" :key="index">{{ bullet }}</li>
+        </ul>
+        <ul v-if="entry.tech?.length" class="experience-tech">
+          <GlowPill v-for="tech in entry.tech" :key="tech" :label="tech" />
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -157,11 +161,24 @@ const { onMouseMove, glowStyle } = useGlowSpotlight(headerEl, 100)
   transform: rotate(180deg);
 }
 
-.experience-panel {
-  padding: 0 1.125rem 1.125rem;
+.experience-panel-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
 }
 
-.experience-item--expanded .experience-panel {
+.experience-panel-wrapper--expanded {
+  grid-template-rows: 1fr;
+}
+
+.experience-panel {
+  overflow: hidden;
+  padding: 0 1.125rem;
+  transition: padding 300ms ease;
+}
+
+.experience-panel-wrapper--expanded .experience-panel {
+  padding: 0 1.125rem 1.125rem;
   border-top: 1px solid var(--border);
 }
 
