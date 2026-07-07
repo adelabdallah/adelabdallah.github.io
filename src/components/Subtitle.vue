@@ -72,7 +72,7 @@ function onSubtitleClick() {
 }
 
 .subtitle-prompt {
-  color: var(--accent-pink);
+  color: var(--subtitle-prompt);
   flex-shrink: 0;
 }
 
@@ -88,14 +88,14 @@ function onSubtitleClick() {
 }
 
 .subtitle-text {
-  color: var(--accent-cyan);
+  color: var(--subtitle-text);
   opacity: 0.9;
   transition: color 0.2s ease;
 }
 
 .subtitle:hover .subtitle-text {
   opacity: 1;
-  color: var(--accent-pink);
+  color: var(--subtitle-text-hover);
 }
 
 .subtitle:focus-visible {

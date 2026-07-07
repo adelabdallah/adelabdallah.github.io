@@ -1,8 +1,8 @@
 :root,
 [data-theme='light'] {
-  --bg: #e3f0fa;
-  --bg-gradient-end: #edf4fc;
-  --bg-elevated: #f7fbff;
+  --bg: #f8fbfe;
+  --bg-gradient-end: #fcfdfe;
+  --bg-elevated: #ffffff;
   --text: #1e3a52;
   --text-muted: #6b849c;
   --accent: #00bcd4;
@@ -13,6 +13,9 @@
   --accent-orange-hover: #e08830;
   --border: #b8cfe0;
   --cursor: #00bcd4;
+  --subtitle-text: #e879a9;
+  --subtitle-text-hover: #00bcd4;
+  --subtitle-prompt: #00bcd4;
   --divider-silver: #a8b8c8;
   --divider-chrome: #d0dae4;
   --shadow: rgba(30, 80, 120, 0.08);
@@ -33,6 +36,9 @@
   --accent-orange-hover: #ffc76a;
   --border: #1a2840;
   --cursor: #ff71ce;
+  --subtitle-text: #4dd0e1;
+  --subtitle-text-hover: #ff71ce;
+  --subtitle-prompt: #ff71ce;
   --divider-silver: rgba(100, 120, 145, 0.55);
   --divider-chrome: rgba(160, 180, 200, 0.75);
   --shadow: rgba(0, 0, 0, 0.45);
@@ -54,6 +60,9 @@
     --accent-orange-hover: #ffc76a;
     --border: #1a2840;
     --cursor: #ff71ce;
+    --subtitle-text: #4dd0e1;
+    --subtitle-text-hover: #ff71ce;
+    --subtitle-prompt: #ff71ce;
     --divider-silver: rgba(100, 120, 145, 0.55);
     --divider-chrome: rgba(160, 180, 200, 0.75);
     --shadow: rgba(0, 0, 0, 0.45);
